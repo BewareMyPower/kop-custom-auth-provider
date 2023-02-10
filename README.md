@@ -10,11 +10,13 @@ Run the [Ory Hydra](https://www.ory.sh/hydra/) as the OAuth2 authorization serve
 docker compose -f hydra/docker-compose.yml up -d
 ```
 
-Make sure you have installed the following commands:
-- `docker`
-- `jq`
-- `node`/`npm`
-- `javac`/`mvn`
+> **NOTE**
+>
+> Make sure you have installed the following commands before going ahead:
+> - `docker`
+> - `jq`
+> - `node`/`npm`
+> - `javac`/`mvn`
 
 Run the following commands:
 
@@ -47,4 +49,17 @@ cp ../custom-auth/target/custom-auth-1.0-SNAPSHOT.jar ./lib/
 
 ## Test the Kafka client with OAuth2 authentication
 
-TODO:
+```bash
+# /tmp/client_credentials.json is the hard-coded path of the demo
+cp ./client_credentials.json /tmp/
+cd ./kafka-client-oauth2
+mvn clean package
+mvn exec:java -Dexec.mainClass=Main
+```
+
+You will see the following output:
+
+```
+Sent to offset 0
+Received hello from offset 0
+```
