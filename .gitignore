@@ -1,0 +1,10 @@
+# Maven
+log/
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+.fleet/*
