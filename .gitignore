@@ -13,3 +13,6 @@ public-key*
 standalone.conf
 
 node_modules/
+
+*.tar.gz
+apache-pulsar-*

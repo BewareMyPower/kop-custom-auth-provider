@@ -2,7 +2,9 @@
 
 [KoP](https://github.com/streamnative/kop) with custom authentication provider.
 
-Run the Ory Hydra as the OAuth2 authorization server:
+## Set up the KoP
+
+Run the [Ory Hydra](https://www.ory.sh/hydra/) as the OAuth2 authorization server:
 
 ```bash
 docker compose -f hydra/docker-compose.yml up -d
@@ -28,9 +30,21 @@ cd -
 Then, copy the `standalone.conf` and `*.nar` to the path of your Pulsar binary directory and run the standalone.
 
 ```bash
-# $PULSAR is the Pulsar binary directory
-cp ./standalone.conf $PULSAR/conf/
-cp ./custom-auth/target/custom-auth-1.0-SNAPSHOT.jar $PULSAR/lib
-cd $PULSAR
+# Use Pulsar 2.10.3 and KoP 2.10.3.1 to test
+# The NAR package of KoP 2.10.3.1 is built with JDK 11, so you must run it in JRE 11 or higher.
+# Otherwise, you should build your own KoP from source.
+curl -O -L https://archive.apache.org/dist/pulsar/pulsar-2.10.3/apache-pulsar-2.10.3-bin.tar.gz
+tar zxf apache-pulsar-2.10.3-bin.tar.gz
+cd apache-pulsar-2.10.3/
+mkdir protocols && cd protocols
+curl -O -L https://github.com/streamnative/kop/releases/download/v2.10.3.1/pulsar-protocol-handler-kafka-2.10.3.1.nar
+cd ..
+
+cp ../standalone.conf ./conf/
+cp ../custom-auth/target/custom-auth-1.0-SNAPSHOT.jar ./lib/
 ./bin/pulsar standalone -nss -nfw
 ```
+
+## Test the Kafka client with OAuth2 authentication
+
+TODO:
