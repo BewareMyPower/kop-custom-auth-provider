@@ -8,3 +8,8 @@ target/
 *.iml
 *.iws
 .fleet/*
+
+public-key*
+standalone.conf
+
+node_modules/
